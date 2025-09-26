@@ -1,1 +1,25 @@
 #include <iostream>
+class Mom {
+public:
+	void mom() {
+		cout << "부모1 호출" << endl;
+	}
+};
+class Dad {
+public:
+	void dad() {
+		cout << "부모2 호출" << endl;
+	}
+};
+class Child : public Mom, public Dad {
+public:
+	void child() {
+		cout << "상속받은 자식입니다" << endl;
+	}
+};
+
+int main() { // Child는 mom,dad 두 클래스의 멤버를 모두 사용 가능
+	Child c; 
+	c.child();
+	c.mom();
+	c.dad();
