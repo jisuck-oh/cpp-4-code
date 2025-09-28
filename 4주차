@@ -1,25 +1,266 @@
 #include <iostream>
-class Mom {
+using namespace std;
+
+//자식 클래스 정의 내용
+/*class parent{
+public: // 부모클래스
+	void momdad(){
+	cout << "부모" << endl;
+	}
+};
+class Child : public Parent { //자식클래스
 public:
-	void mom() {
+	void me(){
+		cout << "자식" << endl;
+	}
+};
+int main(){
+	Child c;
+	c.momdad();
+	c.me();
+}*/
+
+//오버라이딩 내용
+/*class Animal {
+public:
+	virtual void sound(){ // vritual -> 부모 함수 앞에 붙여야 자식에서 오버라이딩 가능
+		cout << "동물이 소리를 낸다" << endl;
+	}
+};
+class Dog : public Animal {
+public:
+	void sound(){
+		cout << "멍멍" << endl;
+	}
+};
+class Cat : public Animal{
+public:
+	void sound(){
+		cout << "야옹" << endl;
+	}
+};
+int main(){
+	Animal* a1 = new Dog();
+	Animal* a2 = new Cat();
+	a->sound();
+	a2->sound();
+}*/
+
+//단일 상속 내용
+/*class Parent{
+public:
+	Parent(){
+		cout << "부모 생성자 호출" << endl;
+	}
+};
+class Child : pubic Parent {
+public:
+	Child(){
+		cout << "자식 생성자 호출" << endl;
+	}
+};
+int main(){
+	Child c; // 자식 생성자를 호출했지만 자식 생성자 호출 되기 전 부모 생성자 호출
+}*/
+
+// 다중 상속 내용
+/*class Mom{
+public:
+	void mom(){
 		cout << "부모1 호출" << endl;
 	}
 };
-class Dad {
+class Dad{
 public:
-	void dad() {
+	void dad(){
 		cout << "부모2 호출" << endl;
 	}
 };
-class Child : public Mom, public Dad {
+class Child : public Mom, public Dad{
 public:
-	void child() {
+	void child(){
 		cout << "상속받은 자식입니다" << endl;
 	}
 };
-
-int main() { // Child는 mom,dad 두 클래스의 멤버를 모두 사용 가능
-	Child c; 
+int main(){
+	Child c;
 	c.child();
 	c.mom();
 	c.dad();
+}*/
+
+// 상속 접근 지정자 public 내용
+/*class Parent {
+private:
+	int x = 1;
+protected:
+	int y = 2;
+public:
+	int z = 3;
+};
+class Child : public Parent{
+public:
+	void show(){
+		cout << x << endl; // private로 접근하여 접근 불가능
+		cout << y << endl; // 접근 가능 protected 유지
+		cout << z << endl; // 접근 가능 public 유지
+	}
+};
+class Child2 : public Child{
+public:
+	void show(){
+		cout << x << endl; // 외부에서 접근 불가능(private)
+		cout << y << endl; // 외부에서는 protected 접근 불가
+		cout << z << endl; // public 그대로 유지되면서 접근 가능
+}*/
+
+// 상속 접근 지정자 private 내용
+/*class Parent{
+private:
+	int x = 1;
+protected:
+	int y = 2;
+public:
+	int z = 3;
+};
+class Child : private Parent {
+public:
+	void show(){
+		cout << x << endl; // private로 접근하여 접근 불가능
+		cout << y << endl; // 접근 가능 protected 유지
+		cout << z << endl; // 접근 가능 public 유지
+	}
+};
+class Child2 : public Child{ // private으로 상속 받음
+public:
+	void show(){
+		cout << x << endl; // 접근 불가능
+		cout << y << endl; // 접근 불가능(private로 형변환)
+		cout << z << endl; // 접근 불가능(private로 형변환)
+	}
+};
+int main(){
+	Child c;
+	c.show();
+	cout << c.x << endl; // 외부에서 접근 불가능(private)
+	cout << c.y << endl; // 외부에서 접근 불가능(private)
+	cout << c.z << endl; // 외부에서 접근 불가능(private)
+}*/
+
+//상속 접근 지정자 protected
+/* class Parent{
+private:
+	int x = 1;
+protected:
+	int y = 2;
+public:
+	int z = 3;
+};
+class Child : protected Parent{
+public:
+	void show(){
+		cout << x << endl; //private로 접근하여 접근 불가능
+		cout << y << endl; // 접근 가능 protected 유지
+		cout << z << endl; // 접근 가능 public 유지
+	}
+};
+class Child2 : public CHild { // private로 상속 받음
+public:
+	void show(){
+		cout << x << endl; //접근 불가능
+		cout << y << endl; //자식클래스 접근 허용(protected)
+		cout << z << endl; //자식클래스 접근 허용(protected)
+	}
+};
+int main(){
+	Child c;
+	c.show();
+	cout << c.x << endl; // 외부에서 접근 불가능(private)
+	cout << c.y << endl; // 외부에서 접근 불가능(protected)
+	cout << c.z << endl; // 외부에서 접근 불가능(protected)
+}*/
+
+// 수업시간에 github 단일 상속 내용에서 접근 지정자 변경해서 해보란 것
+// 부모 클래스
+/*class Person {
+private:
+	string name;
+	int age;
+
+protected: //부모는 protected
+	Person(string n, int a) : name(n), age(a) {}
+
+	void introduce() {
+		cout << "이름: " << name << ", 나이: " << age << endl;
+	}
+
+	string getName() { return name; }
+};
+
+// 자식 클래스 
+class Student : public Person {
+private:
+	string major;
+
+protected:
+	void study() { //protected라 main에서 호출 불가
+		cout << getName() << " 학생이 " << major << " 전공 공부 중입니다." << endl;
+	}
+public:
+	Student(string n, int a, string m) : Person(n, a), major(m) {}
+	// 생성자는 public안에 넣어줌
+	void showIntroduce() { // 외부에서 쓸 수 있는 유일한 public 함수
+		introduce(); // 부모 protected 함수 
+		study(); // 자식 protected 함수
+	}
+};
+
+int main() {
+	Student s("홍길동", 21, "컴퓨터공학");
+	s.showIntroduce();  //public으로 접근   
+	return 0;
+}*/
+
+// 자신이 짠 코드
+
+/*class Student {
+protected: //자식클래스 접근가능, main 불가능
+	string name;
+public:
+	Student(string n) : name(n) {} //생성자에서 이름 초기화
+
+	virtual void introduce() { // 학생 소개 함수
+		cout << "저는 동의대 학생" << name << "입니다" << endl;
+	}
+};
+class Professor {
+protected:
+	string major;
+public:
+	Professor(string m) : major(m){} //생성자에서 전공 초기화
+
+	void introduce() { // 교수 소개 함수
+		cout << "저는 교수, 전공은 " << major << "입니다 " << endl;
+	}
+};
+class TeachingAssistant : public Student, public Professor { //학생+교수 역할을 다중상속
+public:
+	TeachingAssistant(string n, string m) : Student(n), Professor(m){}
+	// 생성자: 학생과 교수의 생성자를 모두 호출
+
+	void introduce() {
+		cout << "저는 조교" << name << "이고, 전공은" << major << "입니다" << endl;
+		// 학생과 교수로부터 상속받은 맴버 
+	}
+};
+
+int main() {
+	Student s("오지석");
+	Professor p("게임공학과");
+	TeachingAssistant ta("김철수", "컴퓨터공학과");
+
+	s.introduce();
+	p.introduce();
+	ta.introduce();
+}*/
+
