@@ -1,0 +1,286 @@
+#include <iostream>
+using namespace std;
+
+//가상함수
+/*class Base {
+public:
+	// virtual 키워드 사용, 실행 시점에 실제 객체 타입에 따라 함수가 호출
+	virtual void show() { cout << "Base의 클래스" << endl; }
+};
+class Dervied : public Base {
+public:
+	// 부모의 가상함수를 재정의(오버라이딩)
+	void show() override { cout << "Dervied의 클래스" << endl; }
+};
+int main() {
+	Base* ptr = new Dervied(); // 부모클래스 포인터가 자식 클래스 객체 가르킴
+	ptr->show(); // 가상 함수이기에, 포인터의 실제대상인 자식의 show가 호출
+	delete ptr;
+}*/
+//1번
+/*class Point {
+private: //캡슐화(멤버변수 외부에서 직접 접근 x)
+	double x;
+	double y;
+public:
+	Point() { // 기본 생성자
+		x = 0;
+		y = 0;
+		cout << "생성자 호출" << endl;
+	}
+	Point(int x, int y) { // 파라미터 있는 생성자
+		this->x = x;
+		this->y = y;
+		cout << "파라미터가 있는 생성자" << endl;
+	}
+	~Point() { // 소멸자
+		cout << "소멸자 호출" << endl;
+	}
+	double getX() { return x; } // get함수
+	double getY() { return y; }
+
+	void setX(int x) { this->x = x; } //set함수
+	void setY(int y) { this->y = y; }
+
+	void printPoint() { // 좌표 출력 함수
+		cout << "좌표: (" << x << "," << y << ")" << endl;
+	}
+};
+int main() {
+	Point p1; //기본 생성자 사용
+	p1.printPoint();
+
+	p1.setX(10); //set으로 값 변경
+	p1.setY(20);
+	p1.printPoint();
+
+	Point p2(5, 7); //파라미터 있는 생성자
+	p2.printPoint();
+}*/
+
+//2번
+/*class Date {
+	int year;
+	int month;
+	int day;
+
+public:
+	Date() {
+		year = 2025;
+		month = 10;
+		day = 11;
+	}
+	Date(int y, int m, int d): year(y), month(m), day(d) {}
+
+	~Date() {
+		cout << "소멸되었습니다" << endl;
+	}
+
+	void setYear(int y) { year = y; }
+	void setMonth(int m) { month = m; }
+	void setDay(int d) { day = d; }
+
+	int getYear() { return year; }
+	int getMonth() { return month; }
+	int getDay() { return day; }
+
+	void printDate() {
+		cout << year << "년" << month << "월" << day << "일" << endl;
+	}
+};
+
+int main() {
+	Date today;
+	today.printDate();
+
+	Date birth(2003, 3, 29);
+	birth.printDate();
+
+	birth.setYear(2004);
+	birth.setMonth(5);
+	birth.setDay(20);
+
+	//get으로 값 출력
+	cout << "수정된 생일 :" << birth.getYear() << "년" << birth.getMonth()
+		<< "월" << birth.getDay() << "일" << endl;
+}*/
+//3번
+/*class Person {
+	int age;
+public:
+	Person() { // 기본생성자 0으로 초기화
+		age = 0;
+	}
+	void setAge(int a) { // 나이 설정
+		age = a;
+	}
+	int getAge() { //나이 반환
+		return age;
+	}
+};
+int main() {
+	Person p;
+	p.setAge(23); // 나이 설정한 값
+	cout << "나이:" << p.getAge() << endl;
+}*/
+
+// Class 상속 실습(1)
+//1번
+
+/*class Base {
+	int v1; //private 멤버(자식 클래스에서 직접 접근 x)
+protected:
+	int v2; //protected 멤버(자식 클래스에서 직접 접근 가능)
+public: 
+	int v3; //public 멤버(어디서나 접근 가능) 
+
+	int getV1() { return v1; }  // 접근자 (accessor)
+	int getV2() { return v2; }
+	int getV3() { return v3; }
+	void setV1(int v) { v1 = v; }// 설정자 (mutator)
+	void setV2(int v) { v2 = v; }
+	void setV3(int v) { v3 = v; }
+};
+//public 상속
+class Derived1 : public Base {
+public:
+	void test() {
+		//v1 = 1; //private 직접 접근 불가
+		v2 = 2; //protected 자식에서 접근 가능
+		v3 = 3; // public 그대로 상속(접근 가능)
+		cout << "[Derived1] v2=" << v2 << ", v3=" << v3 << endl;
+	}
+};
+//protected 상속
+class Derived2 : protected Base {
+public:
+	void test2() {
+		//v1 = 10; // private 접근 불가 
+		v2 = 20; // protected 접근 가능
+		v3 = 30; // public이지만 protected로 바뀜
+		cout << "[Derived1] v2=" << v2 << ", v3=" << v3 << endl;
+	}
+};
+// private 상속
+class Derived3 : private Base {
+public:
+	void test3() {
+		//v1 = 100; //private 접근 불가능
+		v2 = 200; //내부접근 가능(private로 상속)
+		v3 = 300; //내부접근 가능(private로 상속)
+		cout << "[Derived1] v2=" << v2 << ", v3=" << v3 << endl;
+	}
+};
+
+int main(int argc, char const* argv[])
+{
+	Derived1 d1;
+	Derived2 d2;
+	Derived3 d3;
+
+	cout << "--- Derived1(public 상속) ---" << endl;
+	d1.test();
+	d1.setV1(10);
+	d1.setV2(20);
+	d1.setV3(30);
+	cout << "d1.getV1() :" << d1.getV1() << endl;
+	cout << "d1.getV2() :" << d1.getV2() << endl;
+	cout << "d1.getV3():" << d1.getV3() << endl;
+
+	cout << " ---- Derived2(protected 상속) ----" << endl;
+	d2.test2();
+	//d2.v3 = 10; //외부 접근 불가능(protected로 바뀜)
+	//d2.setV3(40); // setV3도 protected로 바뀜(main에서 접근 불가능)
+
+	cout << " ----- Derived3(private 상속) -----" << endl;
+	d3.test3();
+	//d3.v3 = 10; //private로 바뀜
+	//d3.setV3(50); //main에서 접근 불가능
+
+
+}*/
+//3번
+
+/*class Car
+{
+	int speed;
+public:
+	Car(int s) : speed(s) { // 생성자: Car 객체가 만들어 질 때 값을 설정
+		cout << "car 생성자 호출 (speed = " << speed << ")" << endl;
+	}
+	void setSpeed(int s) { speed = s; }
+	int getSpeed() { return speed; }
+};
+
+class SportCar : public Car
+{
+	bool turbo;
+public:
+	SportCar(int s, bool t) : Car(s), turbo(t) { // 삼항연산자 사용
+		cout << "SportCar 생성자 호출 (turbo = " << (turbo ? "ON" : " OFF ") << ")" << endl;
+	}
+	void setTurbo(bool t) { turbo = t; }
+	int getTurbo() { return turbo; }
+};
+
+int main(int argc, char const* argv[])
+{
+	SportCar myCar(220, true);
+	cout << "speed:" << myCar.getSpeed() << endl;
+	cout << "turbo:" << (myCar.getTurbo() ? "ON" : "OFF") << endl;
+	// turbo가 true면 on false면 off 출력
+	return 0;
+}*/
+
+//4번
+/*class Dimension {
+	double x, y, z; // 좌표값 저장
+public:
+	// 2D 생성자( 3번째 인자에 기본값 0.0 -> 2d 생성 가능)
+	Dimension(double i, double j, double k = 0.0) : x(i), y(j), z(k) {}
+
+	void print() {
+		if (z == 0.0) // z가 0이면 2D , 아니면 3D
+			cout << "2D: (" << x << ", " << y << ")" << endl;
+		else
+			cout << "3D: (" << x << ", " << y << ", " << z << ")" << endl;
+	}
+};
+
+int main() {
+	Dimension point2D(3.0, 4.0); //2D 좌표(z 생략 가능)
+	Dimension point3D(1.0, 2.0, 5.0); //3D 좌표
+
+	point2D.print();  
+	point3D.print();  
+
+	return 0;
+}*/
+
+/*class Parent {
+public:
+	Parent() { cout << "Parent 생성자" << endl; }
+	// 부모 소멸자를 virtual로 선언해야 자식 소멸자도 호출
+	virtual ~Parent() { cout << "Parent 소멸자" << endl; }  // Parent의 소멸자가 Child, TestChild의 소멸자와 연계가 필요(virtual)
+};
+
+class Child :public Parent {
+public:
+	Child() { cout << " Child 생성자" << endl; }
+	~Child() { cout << "Child 소멸자" << endl; }
+};
+
+class TestChild : public Child {
+public:
+	TestChild() { cout << "TestChild 생성자" << endl; }
+	~TestChild() { cout << "TestChild 소멸자" << endl; }
+};
+
+int main() {
+	Parent* a = new TestChild;
+	// 생성자 호출 순서: Parent -> Child -> TestChild
+	delete a;
+	// 부모 포인터로 delete -> virtual없으면 Parent 소멸자만 호출
+	// virtual 있으면 Testchild -> child -> Parent 순으로 호출
+}*/
+
