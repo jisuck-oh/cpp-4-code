@@ -1,0 +1,188 @@
+#include <vector>
+#include <iostream>
+using namespace std;
+/*int main()
+{
+    vector<int> v1, v2, v3;
+
+    v1.push_back(10);
+    v1.push_back(20);
+    v1.push_back(30);
+    v1.push_back(40);
+    v1.push_back(50);
+
+    cout << "v1 = "; // v1값 push_back -- 10,20,30,40,50 출력
+    for (auto& v : v1) {
+        cout << v << " ";
+    }
+    cout << endl;
+
+    v2.assign(v1.begin(), v1.end()); // v1의 전체를 그대로 복사한 것
+    cout << "v2 = ";
+    for (auto& v : v2) {
+        cout << v << " "; // 똩같이 10,20,30,40,50 출력
+    }
+    cout << endl;
+
+    v3.assign(3, 6); // v3 내부의 기존 요소 전부 제거하고 6을 3개 넣어서 6,6,6으로 초기화
+    // assign(n,value)는 value를 n개 집어넣으면 vector 내용을 통째로 재구성하는 함수이다
+    cout << "v3 = ";
+    for (auto& v : v3) {
+        cout << v << " ";
+    }
+    cout << endl;
+
+    v3.assign({ 5, 6, 7 }); // 기존 v3에 넣은 6,6,6 요소 제거
+    // 리스트 5,6,7으로 다시 구성
+    for (auto& v : v3) {
+        cout << v << " ";
+    }
+    cout << endl;
+
+    int& i = v1.at(0); // i는 v1[0]을 참조하므로 같은 메모리 공유
+                       // i 값 변경 = v1[0] 값 변경
+
+    cout << "v1 첫 번째 원소의 값:  " << i << endl; // 값 변경 전 이므로 첫 번째 원소 10 출력
+
+    if (v1 == v2) cout << "v1과 v2는 같다." << endl;
+    else cout << "v1과 v2는 다르다" << endl;
+    // 동일 하므로 if문 호출
+
+    i = 80; // v1[0]의 값 80으로 변경
+    const int& j = v1.at(0); // i는 v1[0]의 참조
+
+    cout << "값을 변경 후 v1 첫 번째 원소의 값:  " << j << endl; // 값 80으로 변경
+
+    if (v1 == v2) cout << "v1과 v2는 같다." << endl;
+    else cout << "v1과 v2는 다르다" << endl;
+    // v1 = {80,20,30,40,50} , v2 = {10,20,30,40,50} 이므로 else문 출력
+}*/
+
+
+
+/*class rect {
+    int height;
+    int width;
+public:
+    rect() : height(0), width(0){} // 기본 생성자
+    rect(int h, int w) : height(h), width(w){} // 매개변수있는 생성자
+
+    int area() const { // 넓이 계산 함수
+        return height * width;
+    }
+
+    void print() const { // 사각형 정보 출력 함수
+        cout << "height:" << height
+            << ", width:" << width
+            << ", area:" << area() << endl;
+    }
+};
+
+int main() {
+    vector<rect> rects; // rect 객체를 저장할 vector
+
+    // 사각형 3개 생성해서 push_back으로 값 저장
+    rects.push_back(rect(3, 5));
+    rects.push_back(rect(10, 2));
+    rects.push_back(rect(7, 7));
+
+    for (auto& r : rects) { // vector에 저장된 사각형 정보 출력
+        r.print();
+    }
+
+    int totalArea = 0; // 사각형 전체 넓이 합
+    for (auto& r : rects) {
+        totalArea += r.area();
+    }
+
+    cout << "전체 사각형 넓이 합:" << totalArea << endl;
+}*/
+
+
+
+/*int main() {
+    vector<int> v1(5);
+
+    v1[0] = 10; // 첫번째 위치에 10 저장
+
+    cout << "v1[0] = " << v1[0] << endl;
+}*/
+
+
+/*void printVec(const vector<int>& v, const string& name) {
+    cout << name << "= { ";
+    for (auto& x : v) cout << x << " ";
+    cout << "}\n";
+}
+int main() {
+    vector<int> v1 = { 1,2,3 };
+    vector<int> v2 = { 1,2,3 };
+    vector<int> v3 = { 1,3,1 };
+
+    printVec(v1, "v1");
+    printVec(v2, "v2");
+    printVec(v3, "v3");
+
+    cout << "\n==== operator!= 테스트 ====\n";
+    if (v1 != v3) cout << "v1 != v3: true\n";
+    else cout << "v1 != v3 : false\n";
+
+    cout << "\n==== operator< 테스트 ====\n";
+    if (v1 < v3) cout << "v1 < v3 : true\n";
+    else cout << "v1 < v3 : false\n";
+
+    cout << "\n==== operator<= 테스트 ====\n";
+    if (v1 <= v3) cout << "v1 <= v3 : true\n";
+    else cout << "v1 <= v3: false\n";
+
+    cout << "\n==== operator> 테스트 ====\n";
+    if (v3 > v2) cout << "v3 > v2 : true\n";
+    else cout << "v3 > v2 : false\n";
+
+    cout << "\n==== operator>= 테스트 ====\n";
+    if (v3 >= v2) cout << "v3 >= v2 : true\n";
+    else cout << "v3 >= v2 : false\n";
+
+    cout << "\n==== operator== 테스트 ====\n";
+    if (v1 == v2) cout << "v1 == v2 : true\n";
+    else cout << "v1 == v2 : false\n";
+
+}*/
+
+
+// 벡터 내용을 출력하는 보조 함수
+/*void print_vector(const vector<int>& v, const string& msg)
+{
+    cout << msg << " [ size = " << v.size()
+        << ", capacity = " << v.capacity() << " ] : ";
+
+    for (auto& x : v) cout << x << " ";
+    cout << "\n";
+}
+
+// assign() 멤버 함수 검증 함수
+void test_assign()
+{
+    cout << "===== vector::assign() 멤버 함수 검증 =====\n";
+
+    vector<int> v;
+
+    // assign(n, value) : 같은 값을 여러 개 채우기
+    v.assign(5, 10);    // 요소 10을 5개 넣기
+    print_vector(v, "1) assign(5, 10) 호출 후");
+
+    // 2) assign(first, last) : 다른 vector 구간 복사
+    vector<int> src = { 1, 2, 3, 4 };
+    v.assign(src.begin(), src.end());
+    print_vector(v, "2) assign(src.begin(), src.end()) 호출 후");
+
+    // 3) assign({initializer_list}) : 초기화 리스트 사용
+    v.assign({ 7, 8, 9 });
+    print_vector(v, "3) assign({7,8,9}) 호출 후");
+}
+
+int main()
+{
+    test_assign();
+    return 0;
+}*/
